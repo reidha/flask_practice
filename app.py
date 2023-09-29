@@ -1,14 +1,17 @@
-from flask import Flask
-from markupsafe import escape
+from flask import render_template
 
-app = Flask(__name__)
-
-
-@app.route('/')
-def hello_world():
-    return "<p>Hello, World!</p>"
+import config
+from models import Person
 
 
-@app.route('/<name>')
-def hello(name):
-    return f"<p>Hello, {escape(name)}!</p>"
+app = config.connex_app
+app.add_api(config.basedir / "swagger.yml")
+
+@app.route("/")
+def home():
+    people = Person.query.all()
+    return render_template("home.html", people=people)
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000, debug=True)

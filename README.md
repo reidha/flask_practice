@@ -1,5 +1,8 @@
 # flask_practice
 
+- https://realpython.com/flask-connexion-rest-api/
+- https://realpython.com/flask-connexion-rest-api-part-2/
+- https://realpython.com/flask-connexion-rest-api-part-3/
 - https://flask.palletsprojects.com/en/2.3.x/
 - https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3
 
