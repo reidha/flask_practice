@@ -1,8 +1,9 @@
 from datetime import datetime
-from config import app, db
+from app import create_app, db
 from models.note import Note
 from models.person import Person
 
+app = create_app()
 
 PEOPLE_NOTES = [
     {
@@ -36,6 +37,7 @@ PEOPLE_NOTES = [
 with app.app_context():
     db.drop_all()
     db.create_all()
+
     for data in PEOPLE_NOTES:
         new_person = Person(lname=data.get("lname"), fname=data.get("fname"))  # type: ignore
         for content, timestamp in data.get("notes", []):

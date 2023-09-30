@@ -1,6 +1,6 @@
 from flask import abort, make_response
 
-from config import db
+from app import db
 from models.note import Note, note_schema
 from models.person import Person
 

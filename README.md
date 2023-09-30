@@ -16,6 +16,7 @@
 
 - https://stackoverflow.com/questions/61340890/split-openapi-paths-into-multiple-path-definition-files (How to split OpenAPI settings into many YAML files.)
 - https://github.com/spec-first/connexion/issues/254#issuecomment-504699959 (How to load multiple YAML files via Connexion)
+- https://stackoverflow.com/questions/50355269/configure-python-flask-app-to-use-create-app-factory-and-use-database-in-model (About TestConfig)
 
 ## Settings
 

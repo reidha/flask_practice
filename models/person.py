@@ -1,7 +1,7 @@
 from datetime import datetime
 from marshmallow_sqlalchemy import fields
 
-from config import db, ma
+from app import db, ma
 from models.note import Note, NoteSchema
 
 

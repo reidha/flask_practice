@@ -1,10 +1,17 @@
+import connexion
+import os
+import pathlib
 import prance
-from flask import render_template
+from flask.app import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
 from pathlib import Path
 from typing import Any
 
-import config
-from models.person import Person
+
+BASE_DIR = pathlib.Path(__file__).parent.resolve()
+db = SQLAlchemy()
+ma = Marshmallow()
 
 
 def get_bundled_specs(main_file: Path) -> dict[str, Any]:
@@ -14,15 +21,19 @@ def get_bundled_specs(main_file: Path) -> dict[str, Any]:
     return parser.specification  # type: ignore
 
 
-app = config.connex_app
-app.add_api(get_bundled_specs(config.basedir / "openapi/main.yml"))
+def create_app(config_class: str = ''):
+    config_name = os.getenv('FLASK_CONFIGURATION', 'default')
 
+    connex_app = connexion.App(__name__, specification_dir=BASE_DIR)
+    app: Flask = connex_app.app  # type: ignore
 
-@app.route("/")
-def home():
-    people = Person.query.all()
-    return render_template("home.html", people=people)
+    if config_class:
+        app.config.from_object(config_class)
+    else:
+        app.config.from_object(f"configurations.{config_name}_config.{config_name.capitalize()}Config")
 
+    db.init_app(app)
+    ma.init_app(app)
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    connex_app.add_api(get_bundled_specs(BASE_DIR / "openapi/main.yml"))
+    return app
