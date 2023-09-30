@@ -16,7 +16,13 @@
 
 - https://stackoverflow.com/questions/61340890/split-openapi-paths-into-multiple-path-definition-files
 
-## Environment
+## Commands
+
+### Start
+
+```
+(.venv) $ python app.py 
+```
 
 ### Virtual environment
 

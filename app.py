@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any
 
 import config
-from models.models import Person
+from models.person import Person
 
 
 def get_bundled_specs(main_file: Path) -> dict[str, Any]:
