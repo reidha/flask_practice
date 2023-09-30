@@ -12,6 +12,10 @@
 
 - https://flask.palletsprojects.com/en/2.3.x/
 
+### Stack Overflow
+
+- https://stackoverflow.com/questions/61340890/split-openapi-paths-into-multiple-path-definition-files
+
 ## Environment
 
 ### Virtual environment

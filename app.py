@@ -1,11 +1,22 @@
+import prance
 from flask import render_template
+from pathlib import Path
+from typing import Any
 
 import config
-from models import Person
+from models.models import Person
+
+
+def get_bundled_specs(main_file: Path) -> dict[str, Any]:
+    parser = prance.ResolvingParser(str(main_file.absolute()),
+                                    lazy=True, backend='openapi-spec-validator')
+    parser.parse()
+    return parser.specification
 
 
 app = config.connex_app
-app.add_api(config.basedir / "swagger.yml")
+app.add_api(get_bundled_specs(config.basedir / "openapi/main.yml"))
+
 
 @app.route("/")
 def home():

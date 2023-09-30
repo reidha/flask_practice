@@ -1,6 +1,6 @@
 from datetime import datetime
 from config import app, db
-from models import Person, Note
+from models.models import Person, Note
 
 
 PEOPLE_NOTES = [

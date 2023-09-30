@@ -1,0 +1,8 @@
+parameters:
+  note_id:
+    name: "note_id"
+    description: "ID of the note"
+    in: path
+    required: true 
+    schema:
+      type: "integer"
