@@ -25,29 +25,29 @@
 Name|Value|Purpose
 ---|---|---
 PYTHONPATH|Path to this repository|Need to run scripts in `/tools/`
+FLASK_CONFIG|'prod'|If not set, 'default' will be used
+FLASK_APP|File or directory name as the entry point|
 
 Sample commands
 ```
 $ export PYTHONPATH="$PYTHONPATH:/path/to/..."
+$ export FLASK_CONFIG="test"
 ```
 
 ### Configuration files
 
-Put configuration files in `/instance/`
+Put configuration files (`.cfg`) in `/instance/`
 
-Sample
+Sample (`/instance/default.cfg`)
 ```
 SQLALCHEMY_DATABASE_URI="mysql+pymysql://root:root@127.0.0.1/temp"
-SQLALCHEMY_TRACK_MODIFICATIONS=False
-DEBUG=True
-TESTING=True
 ```
 
 ## Start the program
 
 ```
-(.venv) $ python app.py 
-(.venv) $ python app.py -e prod  # Use `-e` to select a configuration file
+(.venv) $ flask run 
+(.venv) $ flask run --debug
 ```
 
 ## Others

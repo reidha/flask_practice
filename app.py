@@ -21,16 +21,18 @@ def get_bundled_specs(main_file: Path) -> dict[str, Any]:
     return parser.specification  # type: ignore
 
 
-def create_app(config_class: str = ''):
-    config_name = os.getenv('FLASK_CONFIGURATION', 'default')
-
+def create_app(config_class=None):
     connex_app = connexion.App(__name__, specification_dir=BASE_DIR)
     app: Flask = connex_app.app  # type: ignore
 
+    app.config.from_prefixed_env()
+    config_name = app.config.get("CONFIG", 'default')
     if config_class:
         app.config.from_object(config_class)
     else:
         app.config.from_object(f"configurations.{config_name}_config.{config_name.capitalize()}Config")
+    app.config.from_pyfile(os.path.join(app.instance_path, f"{config_name}.cfg"))
+    print(app.config)
 
     db.init_app(app)
     ma.init_app(app)
