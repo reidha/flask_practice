@@ -1,6 +1,7 @@
 from datetime import datetime
 from config import app, db
-from models.models import Person, Note
+from models.note import Note
+from models.person import Person
 
 
 PEOPLE_NOTES = [
@@ -8,7 +9,7 @@ PEOPLE_NOTES = [
         "lname": "Fairy",
         "fname": "Tooth",
         "notes": [
-            ("I brush my teeth after each meal.", "2022-01-06 17:10:24"),
+            ("I brush my teeth after each meal.", "2022-01-07 17:10:24"),
             ("The other day a friend said, I have big teeth.", "2022-03-05 22:17:54"),
             ("Do you pay per gram?", "2022-03-05 22:18:10"),
         ],
@@ -21,7 +22,7 @@ PEOPLE_NOTES = [
             ("Really! Only good deeds from now on!", "2022-02-06 13:09:21"),
         ],
     },
-        {
+    {
         "lname": "Bunny",
         "fname": "Easter",
         "notes": [
@@ -36,13 +37,13 @@ with app.app_context():
     db.drop_all()
     db.create_all()
     for data in PEOPLE_NOTES:
-        new_person = Person(lname=data.get("lname"), fname=data.get("fname"))
+        new_person = Person(lname=data.get("lname"), fname=data.get("fname"))  # type: ignore
         for content, timestamp in data.get("notes", []):
             new_person.notes.append(
                 Note(
                     content=content,
                     timestamp=datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S"),
-                )
+                )  # type: ignore
             )
         db.session.add(new_person)
     db.session.commit()

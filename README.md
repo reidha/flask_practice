@@ -12,9 +12,22 @@
 
 - https://flask.palletsprojects.com/en/2.3.x/
 
-### Stack Overflow
+### Other info
 
 - https://stackoverflow.com/questions/61340890/split-openapi-paths-into-multiple-path-definition-files
+
+## Settings
+
+### Environment variables
+
+Name|Value|Purpose
+---|---|---
+PYTHONPATH|Path to this repository|Need to run scripts in `/tools/`
+
+Sample commands
+```
+$ export PYTHONPATH="$PYTHONPATH:/path/to/..."
+```
 
 ## Commands
 

@@ -11,7 +11,7 @@ def get_bundled_specs(main_file: Path) -> dict[str, Any]:
     parser = prance.ResolvingParser(str(main_file.absolute()),
                                     lazy=True, backend='openapi-spec-validator')
     parser.parse()
-    return parser.specification
+    return parser.specification  # type: ignore
 
 
 app = config.connex_app
