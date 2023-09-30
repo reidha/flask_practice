@@ -1,0 +1,6 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "flake8.args": [
+        "--extend-ignore=E501"
+    ]
+}

@@ -1,0 +1,62 @@
+/notes:
+  post:
+    operationId: "apis.notes.create"
+    tags:
+      - Notes
+    summary: "Create a note associated with a person"
+    requestBody:
+        description: "Note to create"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "note"
+              type: "object"
+              properties:
+                person_id:
+                  type: "integer"
+                content:
+                  type: "string"
+    responses:
+      "201":
+        description: "Successfully created a note"
+/notes/{note_id}:
+  get:
+    operationId: "apis.notes.read_one"
+    tags:
+      - Notes 
+    summary: "Read one note"
+    parameters:
+      - $ref: "../components/note.yml#/parameters/note_id"
+    responses:
+      "200":
+        description: "Successfully read one note"
+  put:
+    tags:
+      - Notes
+    operationId: "apis.notes.update"
+    summary: "Update a note"
+    parameters:
+      - $ref: "../components/note.yml#/parameters/note_id"
+    responses:
+      "200":
+        description: "Successfully updated note"
+    requestBody:
+      content:
+        application/json:
+          schema:
+            x-body-name: "note"
+            type: "object"
+            properties:
+              content:
+                type: "string"
+  delete:
+    tags:
+      - Notes
+    operationId: "apis.notes.delete"
+    summary: "Delete a note"
+    parameters:
+      - $ref: "../components/note.yml#/parameters/note_id"
+    responses:
+      "204":
+        description: "Successfully deleted note"
