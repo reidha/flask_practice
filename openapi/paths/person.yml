@@ -1,6 +1,6 @@
 /people:
   get:
-    operationId: "api.people.read_all"
+    operationId: "apis.people.read_all"
     tags:
       - "People"
     summary: "Read the list of people"
@@ -8,7 +8,7 @@
       "200":
         description: "Successfully read people list"
   post:
-    operationId: "api.people.create"
+    operationId: "apis.people.create"
     tags:
       - People
     summary: "Create a person"
@@ -25,7 +25,7 @@
         description: "Successfully created person"
 /people/{lname}:
   get:
-    operationId: "api.people.read_one"
+    operationId: "apis.people.read_one"
     tags:
       - People
     summary: "Read one person"
@@ -37,7 +37,7 @@
   put:  # lname in requestBody will not be considered
     tags:
       - People
-    operationId: "api.people.update"
+    operationId: "apis.people.update"
     summary: "Update a person"
     parameters:
       - $ref: "../components/person.yml#/parameters/lname"
@@ -53,7 +53,7 @@
   delete:
     tags:
       - People
-    operationId: "api.people.delete"
+    operationId: "apis.people.delete"
     summary: "Delete a person"
     parameters:
       - $ref: "../components/person.yml#/parameters/lname"

@@ -14,7 +14,8 @@
 
 ### Other info
 
-- https://stackoverflow.com/questions/61340890/split-openapi-paths-into-multiple-path-definition-files
+- https://stackoverflow.com/questions/61340890/split-openapi-paths-into-multiple-path-definition-files (How to split OpenAPI settings into many YAML files.)
+- https://github.com/spec-first/connexion/issues/254#issuecomment-504699959 (How to load multiple YAML files via Connexion)
 
 ## Settings
 
@@ -29,13 +30,26 @@ Sample commands
 $ export PYTHONPATH="$PYTHONPATH:/path/to/..."
 ```
 
-## Commands
+### Configuration files
 
-### Start
+Put configuration files in `/instance/`
+
+Sample
+```
+SQLALCHEMY_DATABASE_URI="mysql+pymysql://root:root@127.0.0.1/temp"
+SQLALCHEMY_TRACK_MODIFICATIONS=False
+DEBUG=True
+TESTING=True
+```
+
+## Start the program
 
 ```
 (.venv) $ python app.py 
+(.venv) $ python app.py -e prod  # Use `-e` to select a configuration file
 ```
+
+## Others
 
 ### Virtual environment
 
