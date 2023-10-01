@@ -23,6 +23,7 @@
 - https://ai-can-fly.hateblo.jp/entry/flask-directory-structure (Flask directory structure)
 - https://qiita.com/mink0212/items/40e4f796eb4ba7868c08 (pytest)
 - https://qiita.com/mink0212/items/34b9def61d58ab781714 (pytest-cov)
+- https://qiita.com/_akiyama_/items/9ead227227d669b0564e (pytest: fixture)
 
 ## Settings
 
@@ -32,12 +33,13 @@ Name|Value|Purpose
 ---|---|---
 PYTHONPATH|Path to this repository|Run scripts in `/tools/`
 FLASK_CONFIG|'prod'|If not set, 'default' will be used
-FLASK_APP|File or directory name as the entry point (Use `app`)|
+FLASK_APP|File or directory name as the entry point|You have to set `"app"` to run this code
 
 Sample commands
 ```
 $ export PYTHONPATH="$PYTHONPATH:/path/to/..."
 $ export FLASK_CONFIG="test"
+$ export FLASK_APP="app"
 ```
 
 ### Secret configuration files

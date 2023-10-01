@@ -14,6 +14,10 @@ class Person(db.Model):
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
     )
 
+    def __init__(self, lname, fname=None) -> None:
+        self.lname = lname
+        self.fname = fname
+
     notes = db.relationship(
         Note,
         backref="person",

@@ -39,13 +39,13 @@ with app.app_context():
     db.create_all()
 
     for data in PEOPLE_NOTES:
-        new_person = Person(lname=data.get("lname"), fname=data.get("fname"))  # type: ignore
+        new_person = Person(lname=data.get("lname"), fname=data.get("fname"))
         for content, timestamp in data.get("notes", []):
             new_person.notes.append(
                 Note(
                     content=content,
                     timestamp=datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S"),
-                )  # type: ignore
+                )
             )
         db.session.add(new_person)
     db.session.commit()

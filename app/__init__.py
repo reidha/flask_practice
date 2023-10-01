@@ -5,6 +5,7 @@ import prance
 from flask.app import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from logging.config import dictConfig
 from pathlib import Path
 from typing import Any
 
@@ -12,6 +13,35 @@ from typing import Any
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
 db = SQLAlchemy()
 ma = Marshmallow()
+LOGGING_CONFIG = {
+    'version': 1,
+    'formatters': {
+        'default': {
+            'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        }
+    },
+    'handlers': {
+        'file': {
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, '..', 'logs', 'flask.log'),
+            'formatter': 'default',
+            'when': 'D',
+            'backupCount': 0,
+            'utc': True,
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'default',
+        }
+    },
+    'loggers': {
+        '': {
+            'level': '',
+            'handlers': ['file', 'console']
+        }
+    },
+}
 
 
 def get_bundled_specs(main_file: Path) -> dict[str, Any]:
@@ -27,8 +57,12 @@ def create_app(config_class=None):
 
     app.config.from_prefixed_env()
     config_name = app.config.get("CONFIG", 'default')
+
+    LOGGING_CONFIG['loggers']['']['level'] = 'DEBUG' if config_name == 'default' else 'INFO'
+    dictConfig(LOGGING_CONFIG)
+
     app.config.from_object(f"app.configurations.{config_name}_config.{config_name.capitalize()}Config")
-    app.config.from_pyfile(os.path.join(app.instance_path, f"{config_name}.cfg"))
+    app.config.from_pyfile(os.path.join(app.instance_path, f"{config_name}.cfg"), silent=True)
     if config_class:
         app.config.from_object(config_class)
 
