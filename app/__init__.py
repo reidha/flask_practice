@@ -27,7 +27,7 @@ def create_app(config_class=None):
 
     app.config.from_prefixed_env()
     config_name = app.config.get("CONFIG", 'default')
-    app.config.from_object(f"configurations.{config_name}_config.{config_name.capitalize()}Config")
+    app.config.from_object(f"app.configurations.{config_name}_config.{config_name.capitalize()}Config")
     app.config.from_pyfile(os.path.join(app.instance_path, f"{config_name}.cfg"))
     if config_class:
         app.config.from_object(config_class)

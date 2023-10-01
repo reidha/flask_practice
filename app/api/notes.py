@@ -1,8 +1,8 @@
 from flask import abort, make_response
 
 from app import db
-from models.note import Note, note_schema
-from models.person import Person
+from app.models.note import Note, note_schema
+from app.models.person import Person
 
 
 def read_one(note_id):

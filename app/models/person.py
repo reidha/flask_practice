@@ -2,7 +2,7 @@ from datetime import datetime
 from marshmallow_sqlalchemy import fields
 
 from app import db, ma
-from models.note import Note, NoteSchema
+from app.models.note import Note, NoteSchema
 
 
 class Person(db.Model):

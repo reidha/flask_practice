@@ -1,7 +1,7 @@
 from flask import abort, make_response
 
 from app import db
-from models.person import Person, people_schema, person_schema
+from app.models.person import Person, people_schema, person_schema
 
 
 def read_all():

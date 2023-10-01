@@ -24,9 +24,9 @@
 
 Name|Value|Purpose
 ---|---|---
-PYTHONPATH|Path to this repository|Need to run scripts in `/tools/`
+PYTHONPATH|Path to this repository|Run scripts in `/tools/`
 FLASK_CONFIG|'prod'|If not set, 'default' will be used
-FLASK_APP|File or directory name as the entry point|
+FLASK_APP|File or directory name as the entry point (Use `app`)|
 
 Sample commands
 ```
