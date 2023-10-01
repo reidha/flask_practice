@@ -12,11 +12,6 @@ class Note(db.Model):
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
     )
 
-    def __init__(self, content, timestamp=None) -> None:
-        self.content = content
-        if timestamp is not None:
-            self.timestamp = timestamp
-
 
 class NoteSchema(ma.SQLAlchemyAutoSchema):
     class Meta:

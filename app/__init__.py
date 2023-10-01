@@ -51,7 +51,7 @@ def get_bundled_specs(main_file: Path) -> dict[str, Any]:
     return parser.specification  # type: ignore
 
 
-def create_app(config_class=None):
+def create_app(test_config: dict = {}):
     connex_app = connexion.App(__name__, specification_dir=BASE_DIR)
     app: Flask = connex_app.app  # type: ignore
 
@@ -63,8 +63,8 @@ def create_app(config_class=None):
 
     app.config.from_object(f"app.configurations.{config_name}_config.{config_name.capitalize()}Config")
     app.config.from_pyfile(os.path.join(app.instance_path, f"{config_name}.cfg"), silent=True)
-    if config_class:
-        app.config.from_object(config_class)
+    if test_config:
+        app.config.update(test_config)
 
     db.init_app(app)
     ma.init_app(app)

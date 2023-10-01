@@ -8,9 +8,10 @@
 - https://realpython.com/flask-connexion-rest-api-part-2/
 - https://realpython.com/flask-connexion-rest-api-part-3/
 
-### Tutorial
+### Official tutorial
 
 - https://flask.palletsprojects.com/en/2.3.x/
+- https://github.com/pallets/flask/tree/2.3.3/examples/tutorial
 
 ### Other info
 
@@ -58,6 +59,13 @@ SQLALCHEMY_DATABASE_URI="mysql+pymysql://root:root@127.0.0.1/temp"
 (.venv) $ flask run --debug
 ```
 
+## Test
+
+```
+(.venv) $ pytest -v --cov --cov-branch
+(.venv) $ pytest -v --cov --cov-branch --disable-warnings
+```
+
 ## Others
 
 ### Virtual environment
@@ -82,3 +90,8 @@ $ pip install -r requirements.txt
 ```
 $ pip freeze > requirements.txt  
 ```
+
+### nb-clean
+
+- Use `nb-clean` https://pypi.org/project/nb-clean/ to prevent ipynb outputs from being pushed to Git.
+- Run `nb-clean add-filter --remove-empty-cells` once and it's valid as long as you keep the local repo. (If this becomes valid successfully, you can see the change in `.git/config`.)
