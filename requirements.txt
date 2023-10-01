@@ -10,6 +10,7 @@ click==8.1.7
 clickclick==20.10.2
 comm==0.1.4
 connexion==2.14.2
+coverage==7.3.1
 debugpy==1.8.0
 decorator==5.1.1
 executing==1.2.0
@@ -52,6 +53,7 @@ pure-eval==0.2.2
 Pygments==2.16.1
 PyMySQL==1.1.0
 pytest==7.4.2
+pytest-cov==4.1.0
 python-dateutil==2.8.2
 PyYAML==6.0.1
 pyzmq==25.1.1
