@@ -1,7 +1,7 @@
 from datetime import datetime
 from app import create_app, db
-from models.note import Note
-from models.person import Person
+from app.models.note import Note
+from app.models.person import Person
 
 app = create_app()
 

@@ -1,6 +1,6 @@
 /notes:
   post:
-    operationId: "apis.notes.create"
+    operationId: "app.api.notes.create"
     tags:
       - Notes
     summary: "Create a note associated with a person"
@@ -22,7 +22,7 @@
         description: "Successfully created a note"
 /notes/{note_id}:
   get:
-    operationId: "apis.notes.read_one"
+    operationId: "app.api.notes.read_one"
     tags:
       - Notes 
     summary: "Read one note"
@@ -34,7 +34,7 @@
   put:
     tags:
       - Notes
-    operationId: "apis.notes.update"
+    operationId: "app.api.notes.update"
     summary: "Update a note"
     parameters:
       - $ref: "../components/note.yml#/parameters/note_id"
@@ -53,7 +53,7 @@
   delete:
     tags:
       - Notes
-    operationId: "apis.notes.delete"
+    operationId: "app.api.notes.delete"
     summary: "Delete a note"
     parameters:
       - $ref: "../components/note.yml#/parameters/note_id"

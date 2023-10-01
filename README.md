@@ -1,4 +1,4 @@
-# flask_practice
+# flask_sample_architecture
 
 ## References
 
@@ -18,15 +18,21 @@
 - https://github.com/spec-first/connexion/issues/254#issuecomment-504699959 (How to load multiple YAML files via Connexion)
 - https://stackoverflow.com/questions/50355269/configure-python-flask-app-to-use-create-app-factory-and-use-database-in-model (About TestConfig)
 
+### Other info (Non-English)
+
+- https://ai-can-fly.hateblo.jp/entry/flask-directory-structure (Flask directory structure)
+- https://qiita.com/mink0212/items/40e4f796eb4ba7868c08 (pytest)
+- https://qiita.com/mink0212/items/34b9def61d58ab781714 (pytest-cov)
+
 ## Settings
 
 ### Environment variables
 
 Name|Value|Purpose
 ---|---|---
-PYTHONPATH|Path to this repository|Need to run scripts in `/tools/`
+PYTHONPATH|Path to this repository|Run scripts in `/tools/`
 FLASK_CONFIG|'prod'|If not set, 'default' will be used
-FLASK_APP|File or directory name as the entry point|
+FLASK_APP|File or directory name as the entry point (Use `app`)|
 
 Sample commands
 ```
@@ -34,9 +40,9 @@ $ export PYTHONPATH="$PYTHONPATH:/path/to/..."
 $ export FLASK_CONFIG="test"
 ```
 
-### Configuration files
+### Secret configuration files
 
-Put configuration files (`.cfg`) in `/instance/`
+Put configuration files (`.cfg`) in `/instance/`. The file will not be uploaded to Git.
 
 Sample (`/instance/default.cfg`)
 ```
