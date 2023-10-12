@@ -11,6 +11,7 @@ from typing import Any
 
 
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
+LOG_DIR = os.path.join(BASE_DIR, '..', 'logs')
 db = SQLAlchemy()
 ma = Marshmallow()
 LOGGING_CONFIG = {
@@ -24,7 +25,7 @@ LOGGING_CONFIG = {
     'handlers': {
         'file': {
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, '..', 'logs', 'flask.log'),
+            'filename': os.path.join(LOG_DIR, 'flask.log'),
             'formatter': 'default',
             'when': 'D',
             'backupCount': 0,
@@ -58,6 +59,7 @@ def create_app(test_config: dict = {}):
     app.config.from_prefixed_env()
     config_name = app.config.get("CONFIG", 'default')
 
+    os.makedirs(LOG_DIR, exist_ok=True)
     LOGGING_CONFIG['loggers']['']['level'] = 'DEBUG' if config_name == 'default' else 'INFO'
     dictConfig(LOGGING_CONFIG)
 
