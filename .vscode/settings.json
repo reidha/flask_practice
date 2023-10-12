@@ -2,5 +2,6 @@
     "python.analysis.typeCheckingMode": "basic",
     "flake8.args": [
         "--extend-ignore=E501"
-    ]
+    ],
+    "python.analysis.autoImportCompletions": true
 }
