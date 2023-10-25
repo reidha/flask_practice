@@ -25,6 +25,7 @@
 - https://qiita.com/mink0212/items/40e4f796eb4ba7868c08 (pytest)
 - https://qiita.com/mink0212/items/34b9def61d58ab781714 (pytest-cov)
 - https://qiita.com/_akiyama_/items/9ead227227d669b0564e (pytest: fixture)
+- https://github.com/tanakatsu/flask-largeapp-sample (Define `db` in `models/__init__.py`)
 
 ## Settings
 
