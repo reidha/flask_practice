@@ -3,46 +3,15 @@ import os
 import pathlib
 import prance
 from flask.app import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
 from logging.config import dictConfig
 from pathlib import Path
 from typing import Any
 
+from app.models import db, ma
+
 
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
 LOG_DIR = os.path.join(BASE_DIR, '..', 'logs')
-db = SQLAlchemy()
-ma = Marshmallow()
-LOGGING_CONFIG = {
-    'version': 1,
-    'formatters': {
-        'default': {
-            'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
-            'datefmt': '%Y-%m-%d %H:%M:%S',
-        }
-    },
-    'handlers': {
-        'file': {
-            'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': os.path.join(LOG_DIR, 'flask.log'),
-            'formatter': 'default',
-            'when': 'D',
-            'backupCount': 0,
-            'utc': True,
-        },
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'default',
-        }
-    },
-    'loggers': {
-        '': {
-            'level': '',
-            'handlers': ['file', 'console']
-        }
-    },
-}
 
 
 def get_bundled_specs(main_file: Path) -> dict[str, Any]:
@@ -50,6 +19,38 @@ def get_bundled_specs(main_file: Path) -> dict[str, Any]:
                                     lazy=True, backend='openapi-spec-validator')
     parser.parse()
     return parser.specification  # type: ignore
+
+
+def get_logging_config(config_name: str) -> dict[str, Any]:
+    return {
+        'version': 1,
+        'formatters': {
+            'default': {
+                'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+                'datefmt': '%Y-%m-%d %H:%M:%S',
+            }
+        },
+        'handlers': {
+            'file': {
+                'class': 'logging.handlers.TimedRotatingFileHandler',
+                'filename': os.path.join(LOG_DIR, 'flask.log'),
+                'formatter': 'default',
+                'when': 'D',
+                'backupCount': 0,
+                'utc': True,
+            },
+            'console': {
+                'class': 'logging.StreamHandler',
+                'formatter': 'default',
+            }
+        },
+        'loggers': {
+            '': {
+                'level': 'DEBUG' if config_name == 'default' else 'INFO',
+                'handlers': ['file', 'console']
+            }
+        },
+    }
 
 
 def create_app(test_config: dict = {}):
@@ -60,8 +61,7 @@ def create_app(test_config: dict = {}):
     config_name = app.config.get("CONFIG", 'default')
 
     os.makedirs(LOG_DIR, exist_ok=True)
-    LOGGING_CONFIG['loggers']['']['level'] = 'DEBUG' if config_name == 'default' else 'INFO'
-    dictConfig(LOGGING_CONFIG)
+    dictConfig(get_logging_config(config_name))
 
     app.config.from_object(f"app.configurations.{config_name}_config.{config_name.capitalize()}Config")
     app.config.from_pyfile(os.path.join(app.instance_path, f"{config_name}.cfg"), silent=True)

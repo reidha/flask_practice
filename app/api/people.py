@@ -1,6 +1,6 @@
 from flask import abort, make_response
 
-from app import db
+from app.models import db
 from app.models.person import Person, people_schema, person_schema
 
 

@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from app import db, ma
+from app.models import db, ma
 
 
 class Note(db.Model):
